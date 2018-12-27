@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId></groupId>
+	<artifactId>web</artifactId>
+    <version>11</version>
+	<packaging>war</packaging>
+
+	<description>Web Application</description>
+
+	<name>Web Application</name>
+
+	<parent>
+		<groupId>gov.faa.ng6</groupId>
+		<artifactId>ng6</artifactId>
+		<version>11</version>
+	</parent>
+
+	<build>
+        <plugins>
+            <!-- <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin> -->
+			<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>2.4.2</version>
+			<executions>
+			      <execution>
+			          <id>copy-resources</id>
+			          <phase>validate</phase>
+			          <goals><goal>copy-resources</goal></goals>
+			          <configuration>
+			              <outputDirectory>${project.build.directory}/web-11</outputDirectory>
+			              <resources>
+			                  <resource>
+			                      <directory>${project.parent.basedir}/angular/dist</directory>
+			                  </resource>
+			              </resources>
+			          </configuration>
+			      </execution>
+			</executions>
+			</plugin>
+			<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.6</version>
+                <executions>
+                    <execution>
+                    <configuration>
+                        <overwrite>true</overwrite>
+						<webXml>${project.basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+                        <!-- <outputDirectory>${project.build.directory}</outputDirectory> -->
+                        <resources>
+                            <resource>
+                                <directory>${project.parent.basedir}/angular/dist</directory>
+                            </resource>
+                        </resources>
+                    </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+	</build>
+	<profiles>
+		<profile>
+			<id>SPRING-BOOT</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

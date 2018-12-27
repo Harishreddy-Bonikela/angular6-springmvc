@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId></groupId>
+	<artifactId>angular</artifactId>
+	<version>11</version>
+	<!-- <packaging>war</packaging> -->
+	<name>Demo UI Application</name>
+
+	<parent>
+		<groupId></groupId>
+		<artifactId>ng6</artifactId>
+		<version>11</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+    <build>
+        <plugins>
+            <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.6</version>
+            </plugin>
+
+            <!-- Plugin to execute command  "npm install" and "npm run build" inside /angular directory -->
+            <plugin>
+            <groupId>com.github.eirslett</groupId>
+            <artifactId>frontend-maven-plugin</artifactId>
+            <version>1.0</version>
+            <configuration>
+                <workingDirectory>${project.basedir}</workingDirectory>
+            </configuration>
+            <executions>
+                <!-- It will install nodejs and npm -->
+                <execution>
+                <id>install node and npm</id>
+                <goals>
+                    <goal>install-node-and-npm</goal>
+                </goals>
+                <configuration>
+                    <nodeVersion>v8.9.0</nodeVersion>
+                    <npmVersion>6.4.1</npmVersion>
+                </configuration>
+                </execution>
+
+                <!-- It will execute command "npm install" inside "/angular" directory -->
+                <execution>
+                <id>npm install</id>
+                <goals>
+                    <goal>npm</goal>
+                </goals>
+                <configuration>
+                    <arguments>install</arguments>
+                </configuration>
+                </execution>
+
+               <execution>
+                    <id>prod</id>
+                    <goals>
+                        <goal>npm</goal>
+                    </goals>
+                    <configuration>
+                        <arguments>run-script build</arguments>
+                    </configuration>
+                    <phase>generate-resources</phase>
+                </execution>
+            </executions>
+            </plugin>
+
+            <!-- Plugin to copy the content of /angular/dist/ directory to output directory (ie/ /target/transactionManager-1.0/) -->
+           
+            <!-- <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+                    <configuration>
+                        <overwrite>true</overwrite>
+                        <webXml>../web/src/main/webapp/WEB-INF/web.xml</webXml>
+                        <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                        <outputDirectory>${project.build.directory}</outputDirectory>
+                        <resources>
+                            <resource>
+                                <directory>${project.basedir}/dist</directory>
+                            </resource>
+                        </resources>
+                    </configuration>
+			</plugin> -->
+            
+        </plugins>
+        </build>
+	
+</project>

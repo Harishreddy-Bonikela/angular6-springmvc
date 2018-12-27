@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId></groupId>
+	<artifactId>ng6</artifactId>
+    <version>11</version>
+	<packaging>pom</packaging>
+
+	<name>ng6 Application</name>
+
+    <modules>
+        <module>angular</module>
+        <module>web</module>
+    </modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat7-websocket</artifactId>
+			<version>7.0.68</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	
+	<repositories>
+        <repository>
+            <id>ait-soai-repo</id>
+            <name>AIT::SOA-Infrastructure Repository</name>
+            <url>http://iamcdcdvap506.avs.faa.gov:8081/artifactory/repo</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>web</id>
+            <name>UI</name>
+            <url></url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+        </repository>
+    </repositories>
+
+</project>
